@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingLeft="5dp"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/artist_image"
+            android:padding="1dp"
+            android:layout_alignParentLeft="true"
+            android:transitionName="transition_artist_name"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@id/artist_image"
+            android:layout_toLeftOf="@id/current_playing_indicator">
+
+            <TextView
+                android:id="@+id/artist_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="3dp"
+                android:textSize="13sp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                style="@style/TextAppearance.AppCompat.Body1"/>
+
+            <TextView
+                android:id="@+id/album_song_count"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="3dp"
+                android:textSize="13sp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                style="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"/>
+
+
+        </LinearLayout>
+        
+        <net.steamcrafted.materialiconlib.MaterialIconView
+            android:id="@+id/current_playing_indicator"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginRight="20dp"
+            android:scaleType="center"
+            app:materialIconColor="#fff"
+            app:materialIconSize="35dp"
+            android:visibility="invisible"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="Nsongs">
+        <item quantity="zero">@string/count_songs</item>
+        <item quantity="one">@string/count_song</item>
+        <item quantity="other">@string/count_songs</item>
+    </plurals>
+
+</resources>
