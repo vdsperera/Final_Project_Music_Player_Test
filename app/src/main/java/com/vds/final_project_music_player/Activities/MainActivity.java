@@ -228,6 +228,10 @@ public class MainActivity extends ATEActivity implements ATEToolbarCustomizer, A
         else return 0;
     }
 
+    public String getArtist(){
+        return SongLoader.getAllSongs(this).get(musicService.getPosition()).artistName;
+    }
+
     @Override
     public void seekTo(int i) {
         seekToI(i);

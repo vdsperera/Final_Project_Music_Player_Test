@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.MediaController;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.vds.final_project_music_player.MusicService;
 import com.vds.final_project_music_player.R;
@@ -22,6 +24,12 @@ public class QuickControllsFragment extends Fragment implements View.OnClickList
     private Button btnPrev;
     private Button btnPause;
     private Button btnNext;
+    private View preNew;
+    private View nextNew;
+    private View playpauseNew;
+    private TextView artist;
+    private TextView title;
+    private SeekBar seekBar;
     private BottomCardInterface controlls;
     private MusicService musicService;
 
@@ -110,6 +118,7 @@ public class QuickControllsFragment extends Fragment implements View.OnClickList
         public void setController();
         public MusicService getMusicService();
         public void goI();
+        public String getArtist();
 
 
     }
@@ -119,13 +128,21 @@ public class QuickControllsFragment extends Fragment implements View.OnClickList
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.bottom_nowplaying_card,container,false);
-        btnNext = rootView.findViewById(R.id.bottomNext);
-        btnPause = rootView.findViewById(R.id.bottomPlay);
-        btnPrev = rootView.findViewById(R.id.bottomPre);
+        //btnNext = rootView.findViewById(R.id.bottomNext);
+        //btnPause = rootView.findViewById(R.id.bottomPlay);
+        //btnPrev = rootView.findViewById(R.id.bottomPre);
+        preNew = rootView.findViewById(R.id.previousNew);
+        nextNew = rootView.findViewById(R.id.nextNew);
+        playpauseNew = rootView.findViewById(R.id.playpauseNew);
+        artist = rootView.findViewById(R.id.artistNew);
+        title = rootView.findViewById(R.id.titleNew);
 
-        btnPrev.setOnClickListener(this);
-        btnPause.setOnClickListener(this);
-        btnNext.setOnClickListener(this);
+//        btnPrev.setOnClickListener(this);
+ //       btnPause.setOnClickListener(this);
+   //     btnNext.setOnClickListener(this);
+        preNew.setOnClickListener(this);
+        nextNew.setOnClickListener(this);
+        playpauseNew.setOnClickListener(this);
 
 
 
@@ -149,26 +166,34 @@ public class QuickControllsFragment extends Fragment implements View.OnClickList
         super.onResume();
         if (paused){
             //setController();
-            musicService.go();
-            paused = false;
+
 
         }
     }
 
     @Override
     public void onClick(View view) {
-        if (view==btnNext){
+        if (view==nextNew){
             controlls.playNextI();
-        }else if (view==btnPause){
+            //artist.setText(controlls.getArtist());
+        }else if (view==playpauseNew){
             if (controlls.isPlaying()){
                 controlls.playPauseI();
             }else
                 controlls.goI();
+            //artist.setText(controlls.getArtist());
 
         }
-        else if (view==btnPrev){
+        else if (view==preNew){
             controlls.playPrevI();
+            //artist.setText(controlls.getArtist());
         }
 
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }
