@@ -89,9 +89,9 @@ public class MainActivity extends ATEActivity implements ATEToolbarCustomizer, A
     @Override
     protected void onPause() {
         super.onPause();
-        paused = true;
-        playbackPaused =true;
-        musicService.pausePlayer();
+        //paused = true;
+        //playbackPaused =true;
+        //musicService.pausePlayer();
     }
 
     @Override
