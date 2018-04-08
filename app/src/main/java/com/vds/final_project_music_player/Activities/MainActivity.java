@@ -35,8 +35,10 @@ import com.vds.final_project_music_player.MusicService;
 import com.vds.final_project_music_player.R;
 import com.vds.final_project_music_player.Fragments.SongsFragment;
 import com.vds.final_project_music_player.MusicService.MusicBinder;
+import com.vds.final_project_music_player.Subfragment.QuickControllsFragment;
 
-public class MainActivity extends ATEActivity implements ATEToolbarCustomizer, ATENavigationBarCustomizer, SongsFragment.OnMyFragmentListner,MediaController.MediaPlayerControl,View.OnClickListener {
+public class MainActivity extends ATEActivity implements ATEToolbarCustomizer, ATENavigationBarCustomizer,
+        SongsFragment.OnMyFragmentListner,MediaController.MediaPlayerControl,View.OnClickListener,QuickControllsFragment.BottomCardInterface {
 
     ViewPager viewPager;
     private MusicService musicService;
@@ -65,12 +67,14 @@ public class MainActivity extends ATEActivity implements ATEToolbarCustomizer, A
         transaction.replace(R.id.fragment_container,fragment).commitAllowingStateLoss();
         Log.d("muAp","Before Service");
 
-        nxt = findViewById(R.id.pNext);
-        prev = findViewById(R.id.pPrev);
-        pause = findViewById(R.id.pPause);
-        nxt.setOnClickListener(this);
-        prev.setOnClickListener(this);
-        pause.setOnClickListener(this);
+        // Bottom playing card previous
+
+        //nxt = findViewById(R.id.pNext);
+        //prev = findViewById(R.id.pPrev);
+        //pause = findViewById(R.id.pPause);
+//        nxt.setOnClickListener(this);
+  //      prev.setOnClickListener(this);
+    //    pause.setOnClickListener(this);
         setController();
 
     }
@@ -183,16 +187,30 @@ public class MainActivity extends ATEActivity implements ATEToolbarCustomizer, A
 
     @Override
     public void start() {
+        Log.d("muAp","Main start()");
         musicService.go();
     }
 
     @Override
     public void pause() {
+        Log.d("muAp","Main pause()");
+        playPauseI();
+    }
+
+
+    @Override
+    public void playPauseI() {
         musicService.pausePlayer();
     }
 
     @Override
     public int getDuration() {
+        Log.d("muAp","Main getDuration()");
+        return getDurationI();
+    }
+
+    @Override
+    public int getDurationI(){
         if (musicService != null && mBound && isPlaying())
             return musicService.getDuration();
         else return 0;
@@ -200,6 +218,11 @@ public class MainActivity extends ATEActivity implements ATEToolbarCustomizer, A
 
     @Override
     public int getCurrentPosition() {
+        Log.d("muAp","Main getCurrentPosition()");
+        return getCurrentPositionI();
+    }
+
+    public int getCurrentPositionI() {
         if (musicService != null && mBound && musicService.isPlaying())
             return musicService.getPosition();
         else return 0;
@@ -207,42 +230,75 @@ public class MainActivity extends ATEActivity implements ATEToolbarCustomizer, A
 
     @Override
     public void seekTo(int i) {
+        seekToI(i);
+    }
+
+    public void seekToI(int i) {
         musicService.seek(i);
     }
 
     @Override
     public boolean isPlaying() {
+        Log.d("muAp","Main isPlaying()");
         if (musicService != null && mBound)
             return musicService.isPlaying();
         else return false;
     }
 
+    public boolean isPlayingI() {
+        return false;
+    }
+
     @Override
     public int getBufferPercentage() {
+        return getBufferPercentageI();
+    }
+
+    public int getBufferPercentageI() {
         return 0;
     }
 
     @Override
     public boolean canPause() {
+        Log.d("muAp","Main canPause()");
+        return canPauseI();
+    }
+
+    public boolean canPauseI() {
         return true;
     }
 
     @Override
     public boolean canSeekBackward() {
+        Log.d("muAp","Main canSeekBackward()");
+        return canSeekBackwardI();
+    }
+
+
+    public boolean canSeekBackwardI() {
         return true;
     }
 
     @Override
     public boolean canSeekForward() {
+        Log.d("muAp","Main canSeekForward()");
+        return canSeekForwardI();
+    }
+
+    public boolean canSeekForwardI() {
         return true;
     }
 
     @Override
     public int getAudioSessionId() {
+        return getAudioSessionIdI();
+    }
+
+    public int getAudioSessionIdI() {
         return 0;
     }
 
-    private void setController(){
+    public void setController(){
         musicController = new MusicController(this);
         musicController.setPrevNextListeners(new View.OnClickListener() {
             @Override
@@ -270,6 +326,16 @@ public class MainActivity extends ATEActivity implements ATEToolbarCustomizer, A
         musicController.show(0);
     }
 
+    @Override
+    public void playNextI() {
+        musicService.playNext();
+        if (playbackPaused){
+            setController();
+            playbackPaused = false;
+        }
+        musicController.show(0);
+    }
+
     private void playPrev(){
         musicService.playPrev();
         if (playbackPaused){
@@ -278,6 +344,17 @@ public class MainActivity extends ATEActivity implements ATEToolbarCustomizer, A
         }
         musicController.show(0);
     }
+
+    @Override
+    public void playPrevI() {
+        musicService.playPrev();
+        if (playbackPaused){
+            setController();
+            playbackPaused = false;
+        }
+        musicController.show(0);
+    }
+
 
 
     public void songPicked(View view){
@@ -323,6 +400,21 @@ public class MainActivity extends ATEActivity implements ATEToolbarCustomizer, A
             }
             //pause.setBackground((View) findViewById(R.drawable.pauseNew));
         }
+    }
+
+    public void goI(){
+        musicService.go();
+    }
+
+    @Override
+    public void onClickBottomCard() {
+
+    }
+
+
+    @Override
+    public MusicService getMusicService() {
+        return this.musicService;
     }
 }
 
