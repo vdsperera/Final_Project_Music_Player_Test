@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.MediaController;
-import android.widget.Switch;
 
 import com.afollestad.appthemeengine.ATEActivity;
 import com.afollestad.appthemeengine.Config;
@@ -154,11 +152,11 @@ public class MainActivity extends ATEActivity implements ATEToolbarCustomizer, A
     public void onActionPerformed(int pos) {
         Log.d("muAp","Activity onActionPerformed()");
         //if (xx==0){
-            musicService.setSoong(pos);
+            musicService.setSong(pos);
             musicService.playSong();
           //  xx=1;
         //}else if (xx==1){
-            playNext();
+            //playNext();
         //}
 
     }
@@ -281,7 +279,7 @@ public class MainActivity extends ATEActivity implements ATEToolbarCustomizer, A
 
 
     public void songPicked(View view){
-        musicService.setSoong(Integer.parseInt(view.getTag().toString()));
+        musicService.setSong(Integer.parseInt(view.getTag().toString()));
         musicService.playSong();
         if(playbackPaused){
             setController();
@@ -292,13 +290,13 @@ public class MainActivity extends ATEActivity implements ATEToolbarCustomizer, A
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int x=1;
+     /*   int x=1;
         switch(x){
             case 2:
                 musicService.setShuffle();
                 break;
 
-        };
+        };*/
 
         return super.onOptionsItemSelected(item);
     }

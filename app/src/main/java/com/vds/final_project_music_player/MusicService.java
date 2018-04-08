@@ -92,7 +92,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     }
 
-    public void setSoong(int songIndex){
+    public void setSong(int songIndex){
         Log.d("muAp","Service setSong()");
         songPos = songIndex;
     }
