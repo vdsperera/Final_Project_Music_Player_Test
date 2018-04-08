@@ -156,7 +156,48 @@ public class SongsFragment extends Fragment {
         }
     }*/
 
-    /*@Override
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode){
+            case 123:
+                if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                    new LoadSongs().execute("");
+                    Log.d("Music","MSG onrequest permission if");
+                }else {
+                    Toast.makeText(getContext(),"Permission Denied",Toast.LENGTH_LONG).show();
+                    checkPermissionnn();
+                    Log.d("Music","MSG onRequest permission else");
+                }
+                break;
+
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                Log.d("Music","MSG onRequest permission default");
+
+        }
+    }
+
+    private void checkPermissionnn(){
+        Log.d("muAp","MSG Check permission start");
+        if(Build.VERSION.SDK_INT >= 23) {
+            Log.d("Music","MSG Check permission if start");
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                Log.d("Music","MSG CheckSelfPermission if");
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 123);
+                Log.d("Music","MSG Check permission if");
+                return;
+            }
+            else {
+                new LoadSongs().execute("");
+            }
+        }else {
+            new LoadSongs().execute("");
+            Log.d("Music","MSG Check permission else");
+        }
+    }
+/*@Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
         switch (requestCode){
@@ -228,7 +269,7 @@ public class SongsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //checkPermissionnn();
+        checkPermissionnn();
         //new LoadSongs().execute("");
         preferencesUtility = PreferencesUtility.getInstance(getActivity());
 
