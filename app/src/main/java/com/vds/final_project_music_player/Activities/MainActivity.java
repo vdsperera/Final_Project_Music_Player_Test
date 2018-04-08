@@ -305,6 +305,8 @@ public class MainActivity extends ATEActivity implements ATEToolbarCustomizer, A
 
     @Override
     public void onClick(View view) {
+        Log.d("muAp","Main onClick()");
+
         if (view==nxt){
             playNext();
         }
