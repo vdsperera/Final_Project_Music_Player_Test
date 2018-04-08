@@ -312,6 +312,7 @@ public class MainActivity extends ATEActivity implements ATEToolbarCustomizer, A
         else if (view==pause){
             if (isPlaying()){
                 pause();
+                paused = true;
             }
             else if (paused){
                 musicService.go();
