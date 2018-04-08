@@ -99,7 +99,9 @@ public class MainActivity extends ATEActivity implements ATEToolbarCustomizer, A
         super.onResume();
         if (paused){
             setController();
+            musicService.go();
             paused = false;
+
         }
     }
 

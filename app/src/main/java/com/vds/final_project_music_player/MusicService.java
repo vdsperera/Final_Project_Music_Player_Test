@@ -60,6 +60,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     @Override
     public void onDestroy() {
+        Log.d("muAp","Service onDestroy()");
         stopForeground(true);
 
     }
@@ -103,30 +104,37 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public int getPosition(){
+        Log.d("muAp","Service getPosition()");
         return mediaPlayer.getCurrentPosition();
     }
 
     public int getDuration(){
+        Log.d("muAp","Service getDuration()");
         return mediaPlayer.getDuration();
     }
 
     public boolean isPlaying(){
+        Log.d("muAp","Service isPlaying()");
         return mediaPlayer.isPlaying();
     }
 
     public void pausePlayer(){
+        Log.d("muAp","Service pausePlayer()");
         mediaPlayer.pause();
     }
 
     public void seek(int position){
+        Log.d("muAp","Service seek()");
         mediaPlayer.seekTo(position);
     }
 
     public void go(){
+        Log.d("muAp","Service go()");
         mediaPlayer.start();
     }
 
     public void playPrev(){
+        Log.d("muAp","Service playPrev()");
         songPos--;
         if (songPos < 0 )
             songPos = songs.size()-1;
@@ -134,6 +142,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void playNext(){
+        Log.d("muAp","Service playNext()");
         if (shuffle){
             int newSong  = songPos;
             while (newSong == songPos){
@@ -151,6 +160,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void setShuffle(){
+        Log.d("muAp","Service setShuffle()");
         if (shuffle)
             shuffle = false;
         else
